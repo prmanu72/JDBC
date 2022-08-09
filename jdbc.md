@@ -9,6 +9,11 @@ Steps to connect java to database
 5. Execute query
 6. Process result
 7. Close connection & statement
+
+
+executeUpdate - changing the table dimensions - DDL
+
+executeQuery - fetching data deom db - resultset - DQL
 ```java
 package myjdbc;
 
@@ -45,11 +50,16 @@ public class Demo {
 		
 		// 6. process result
 		while(rs.next()) {
-		// Prints 2nd column
 			System.out.println(rs.getString(2));
 
 		}
 		
+		// Inserting Data
+		String query2 = "INSERT INTO STUDENTS VALUES(14, 'Shikamaru')";
+		
+		// Returns no. of rows effected
+		int count = st.executeUpdate(query2);
+		System.out.println(count);
 		
 		// 7. Close connection & statement
 		st.close();
@@ -63,4 +73,28 @@ Output
 Naruto
 Sasuke
 Sai
+1
+```
+Using preparedStement
+```JAVA
+		int newRollNo=14;
+		String newName = "Shikamaru";
+		String query1 = "INSERT INTO STUDENTS VALUES (?, ?)";
+		
+		
+		// 4. Create statement
+		PreparedStatement st = con.prepareStatement(query1);
+		//1, 2 implies question mark position in query1
+		st.setInt(1, newRollNo);
+		st.setString(2, newName);
+		
+		
+		// 5. Execute query
+		int  count = st.executeUpdate();
+		System.out.println(count);
+
+```
+Output
+```
+1
 ```
