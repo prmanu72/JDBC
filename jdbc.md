@@ -45,6 +45,7 @@ public class Demo {
 		
 		// 6. process result
 		while(rs.next()) {
+		// Prints 2nd column
 			System.out.println(rs.getString(2));
 
 		}
